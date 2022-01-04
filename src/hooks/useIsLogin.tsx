@@ -10,6 +10,8 @@ export const useIsLogin = () => {
     if (user) {
       navigate('/');
       setLoading(false);
+    } else {
+      setLoading(false);
     }
   }, [user]);
   return [loading] as const;

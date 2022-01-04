@@ -38,7 +38,14 @@
     padding: 0.25em 2em;
     font-size: 1.05rem;
     font-weight: bold;
-    background: color.$maximum-red;
+    background: color.$maximum-red !important;
+    &:hover {
+      background: color.$maximum-yellow-red !important;
+    }
+    &:disabled {
+      background-color: rgb(255, 93, 93) !important;
+      cursor: not-allowed !important;
+    }
   }
   & .google__button {
     margin: 1em auto;
