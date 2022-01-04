@@ -1,0 +1,25 @@
+@use 'color';
+
+.input {
+  border-color: color.$maximum-yellow-red;
+  width: 80%;
+  margin: 1em auto !important;
+  & label {
+    color: color.$orange !important;
+  }
+
+  & fieldset {
+    border-color: color.$maximum-yellow-red !important;
+  }
+  &:hover fieldset {
+    border-color: color.$maximum-yellow-red !important;
+  }
+
+  &:focus fieldset {
+    border-color: color.$maximum-yellow-red !important;
+  }
+
+  &:active:hover fieldset {
+    border-color: color.$maximum-yellow-red !important;
+  }
+}
