@@ -1,27 +1,25 @@
 import GoogleIcon from '@mui/icons-material/Google';
 import { Button, Divider } from '@mui/material';
 import { Formik } from 'formik';
-import type { FC } from 'react';
-import React from 'react';
+import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { InputField } from '../components/InputField';
 import { createUser } from '../firebase/auth';
+import { useIsLogin } from '../hooks/useIsLogin';
 import styles from '../scss/register.module.scss';
 import { registerSchema } from '../utils/validation';
 interface RegisterProps {}
 export const Register: FC<RegisterProps> = () => {
   const navigate = useNavigate();
-
-  return (
+  const [loading] = useIsLogin();
+  return !loading ? (
     <div className={styles.register}>
       <div className={styles.register__form}>
         <h1>အကောင့်လုပ်ပါ</h1>
         <Formik
           initialValues={{ email: '', password: '', confirm_password: '' }}
-          onSubmit={() => {
-            console.log('submit');
-            createUser('email.com', 'sdfasfd');
-            // createUser('', '');
+          onSubmit={async ({ email, password }) => {
+            await createUser(email, password);
           }}
           validationSchema={registerSchema}
         >
@@ -76,5 +74,7 @@ export const Register: FC<RegisterProps> = () => {
         </h3>
       </div>
     </div>
+  ) : (
+    <></>
   );
 };

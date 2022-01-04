@@ -2,12 +2,14 @@ import GoogleIcon from '@mui/icons-material/Google';
 import { Button, Divider, TextField } from '@mui/material';
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useIsLogin } from '../hooks/useIsLogin';
 import styles from '../scss/login.module.scss';
 
 interface LoginProps {}
 
 export const Login: FC<LoginProps> = () => {
   const navigate = useNavigate();
+  useIsLogin();
 
   return (
     <div className={styles.login}>
