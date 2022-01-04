@@ -1,8 +1,8 @@
-import GoogleIcon from '@mui/icons-material/Google';
 import { Button, Divider } from '@mui/material';
 import { Formik } from 'formik';
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ContinueWithGoogle } from '../components/ContinueWithGoogle';
 import { InputField } from '../components/InputField';
 import { createUser } from '../firebase/auth';
 import { useIsLogin } from '../hooks/useIsLogin';
@@ -54,13 +54,7 @@ export const Register: FC<RegisterProps> = () => {
                 >
                   OR
                 </Divider>
-                <Button
-                  variant="contained"
-                  className={styles.google__button}
-                  startIcon={<GoogleIcon />}
-                >
-                  Continue With Google
-                </Button>
+                <ContinueWithGoogle />
               </>
             );
           }}
