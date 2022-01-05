@@ -4,6 +4,7 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
 } from 'firebase/auth';
 import app from './intialize';
 
@@ -19,4 +20,8 @@ export async function loginUser(email: string, password: string) {
 
 export async function singInWithGoogle() {
   return signInWithPopup(auth, provider);
+}
+
+export async function logout() {
+  return signOut(auth);
 }
