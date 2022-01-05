@@ -16,13 +16,7 @@ export async function createUser(email: string, password: string) {
 export async function loginUser(email: string, password: string) {
   return signInWithEmailAndPassword(auth, email, password);
 }
+
 export async function singInWithGoogle() {
-  const auth = getAuth();
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      console.log(credential);
-    })
-    .catch((error) => {});
+  return signInWithPopup(auth, provider);
 }
