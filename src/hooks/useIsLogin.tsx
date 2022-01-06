@@ -13,6 +13,6 @@ export const useIsLogin = () => {
     } else {
       setLoading(false);
     }
-  }, [user]);
+  }, [user, navigate]);
   return [loading] as const;
 };
