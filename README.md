@@ -34,3 +34,29 @@ $ yarn install && yarn start
   <img src="https://github.com/mgkyawmyotun/restro/blob/master/readmeImages/Screenshot%20(24).png" width="100%" alt="Logo" />
   </a>
 </p>
+
+
+### Register 
+
+<p align="center">
+  <a href="https://restrolight.web.app" target="blank">
+  <img src="https://github.com/mgkyawmyotun/restro/blob/master/readmeImages/Screenshot%20(25).png" width="100%" alt="Logo" />
+  </a>
+</p>
+
+
+### DashBoard 
+
+<p align="center">
+  <a href="https://restrolight.web.app" target="blank">
+  <img src="https://github.com/mgkyawmyotun/restro/blob/master/readmeImages/Screenshot%20(26).png" width="100%" alt="Logo" />
+  </a>
+</p>
+
+### Menu 
+
+<p align="center">
+  <a href="https://restrolight.web.app" target="blank">
+  <img src="https://github.com/mgkyawmyotun/restro/blob/master/readmeImages/Screenshot%20(27).png" width="100%" alt="Logo" />
+  </a>
+</p>
