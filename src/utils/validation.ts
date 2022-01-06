@@ -11,3 +11,9 @@ export const loginSchema = yup.object({
   email: yup.string().email('Invalid email address').required(),
   password: yup.string().min(6).required(),
 });
+export const menuSchema = yup.object({
+  name: yup.string().required(),
+  price: yup.number().required(),
+  phone: yup.number().required(),
+  photo__url: yup.string().required(),
+});

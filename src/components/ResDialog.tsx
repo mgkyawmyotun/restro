@@ -8,7 +8,10 @@ import {
 import { Formik } from 'formik';
 import type { FC } from 'react';
 import React from 'react';
+import { addMenu } from '../firebase/db';
+import { uploadFile } from '../firebase/storage';
 import styles from '../scss/dashboard.module.scss';
+import { menuSchema } from '../utils/validation';
 import { InputField } from './InputField';
 
 interface ResDialogProps {
@@ -28,11 +31,19 @@ export const ResDialog: FC<ResDialogProps> = ({ handleClose, open }) => {
       </DialogTitle>
 
       <Formik
-        initialValues={{ email: '', password: '' }}
-        onSubmit={async ({ email, password }) => {}}
-        // validationSchema={`loginSchema}
+        initialValues={{
+          name: '',
+          price: '',
+          phone: '09',
+          photo__url: '',
+        }}
+        onSubmit={async (values) => {
+          const res = await addMenu(values);
+          console.log(res);
+        }}
+        validationSchema={menuSchema}
       >
-        {({ errors, handleSubmit }) => {
+        {({ errors, handleSubmit, values, setValues }) => {
           return (
             <>
               <DialogContent aria-label="dialog_content">
@@ -45,9 +56,24 @@ export const ResDialog: FC<ResDialogProps> = ({ handleClose, open }) => {
                   variant="contained"
                   component="label"
                   aria-label="upload__button"
+                  disabled={values.photo__url != ''}
                 >
                   Upload Photo
-                  <input type="file" hidden />
+                  <input
+                    type="file"
+                    hidden
+                    onChange={(e) => {
+                      if (e.target.files && e.target.files.length > 0) {
+                        const name = e.target.files[0].name;
+                        uploadFile(e.target.files[0], name).then((res) =>
+                          setValues({
+                            ...values,
+                            photo__url: res.ref.fullPath,
+                          })
+                        );
+                      }
+                    }}
+                  />
                 </Button>
               </DialogContent>
               <DialogActions>
@@ -55,7 +81,7 @@ export const ResDialog: FC<ResDialogProps> = ({ handleClose, open }) => {
                   Cancel
                 </Button>
                 <Button
-                  onClick={handleClose}
+                  onClick={() => handleSubmit()}
                   color="primary"
                   variant="contained"
                 >

@@ -58,3 +58,25 @@
   & h1 {
   }
 }
+
+.list {
+  max-height: 65vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.autocomplete {
+  width: 20em;
+  margin-bottom: 2em;
+}
+
+.topbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & .sort {
+    margin-top: -2em;
+    margin-left: 1em;
+  }
+}
