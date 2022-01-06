@@ -17,3 +17,9 @@ export const menuSchema = yup.object({
   phone: yup.number().required(),
   photo__url: yup.string().required(),
 });
+
+export const resSchema = yup.object({
+  name: yup.string().required(),
+  address: yup.string().required(),
+  photo__url: yup.string().required(),
+});

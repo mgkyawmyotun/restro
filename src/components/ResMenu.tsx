@@ -11,6 +11,7 @@ import {
 import { DocumentData } from 'firebase/firestore';
 import React, { FC, useEffect } from 'react';
 import { getMenus } from '../firebase/db';
+import { useUser } from '../hooks/useUser';
 import styles from '../scss/dashboard.module.scss';
 import { ItemCard } from './ItemCard';
 import { ResDialog } from './ResDialog';
@@ -20,28 +21,32 @@ export const ResMenu: FC<ResMenuProps> = () => {
   const [menu, setMenu] = React.useState<DocumentData[]>();
   const [searchValue, setSearchValue] = React.useState('');
   const [sortBy, setSortBy] = React.useState<'price' | 'name'>('name');
+  const [user] = useUser();
 
   useEffect(() => {
     if (!open) {
-      getMenus().then((data) => {
-        setMenu(data);
-      });
+      if (user) {
+        getMenus(user.uid).then((data) => {
+          setMenu(data);
+        });
+      }
     }
-  }, [open]);
+  }, [open, user]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    if (menu) {
-      if (sortBy == 'price') {
-        const newValues = menu.sort((a, b) => b.price - a.price);
-        setMenu(newValues);
-      }
-      if (sortBy == 'name') {
-        const newValues = menu.sort((a, b) =>
-          a.name === b.name ? 0 : a.name < b.name ? -1 : 1
-        );
-        setMenu(newValues);
-      }
+    if (sortBy === 'price') {
+      //eslint-disable-next-line react-hooks/exhaustive-deps
+      const newValues = menu?.sort((a, b) => b.price - a.price);
+      setMenu(newValues);
     }
-  }, [sortBy]);
+    if (sortBy === 'name') {
+      //eslint-disable-next-line react-hooks/exhaustive-deps
+      const newValues = menu?.sort((a, b) =>
+        a.name === b.name ? 0 : a.name < b.name ? -1 : 1
+      );
+      setMenu(newValues);
+    }
+  }, [sortBy, menu]);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -95,7 +100,7 @@ export const ResMenu: FC<ResMenuProps> = () => {
         {menu &&
           menu
             .filter((data) =>
-              searchValue == ''
+              searchValue === ''
                 ? true
                 : data.name.toLowerCase().includes(searchValue.toLowerCase())
             )

@@ -10,6 +10,7 @@ import type { FC } from 'react';
 import React from 'react';
 import { addMenu } from '../firebase/db';
 import { uploadFile } from '../firebase/storage';
+import { useUser } from '../hooks/useUser';
 import styles from '../scss/dashboard.module.scss';
 import { menuSchema } from '../utils/validation';
 import { InputField } from './InputField';
@@ -19,6 +20,7 @@ interface ResDialogProps {
   open: boolean;
 }
 export const ResDialog: FC<ResDialogProps> = ({ handleClose, open }) => {
+  const [user] = useUser();
   return (
     <Dialog
       open={open}
@@ -38,8 +40,10 @@ export const ResDialog: FC<ResDialogProps> = ({ handleClose, open }) => {
           photo__url: '',
         }}
         onSubmit={async (values) => {
-          const res = await addMenu(values);
-          console.log(res);
+          if (user) {
+            await addMenu(values, user.uid);
+            handleClose();
+          }
         }}
         validationSchema={menuSchema}
       >
@@ -56,7 +60,7 @@ export const ResDialog: FC<ResDialogProps> = ({ handleClose, open }) => {
                   variant="contained"
                   component="label"
                   aria-label="upload__button"
-                  disabled={values.photo__url != ''}
+                  disabled={values.photo__url !== ''}
                 >
                   Upload Photo
                   <input

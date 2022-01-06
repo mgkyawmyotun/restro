@@ -19,3 +19,10 @@ export async function uploadFile(file: File | Blob, name: string) {
   // 'file' comes from the Blob or File API
   return await uploadBytes(storageRef, file);
 }
+
+export async function uploadResImg(file: File | Blob, name: string) {
+  const storage = getStorage();
+  const storageRef = ref(storage, 'restaurant/' + name);
+  // 'file' comes from the Blob or File API
+  return await uploadBytes(storageRef, file);
+}

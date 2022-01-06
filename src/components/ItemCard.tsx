@@ -16,7 +16,7 @@ export const ItemCard: FC<ItemCardProps> = ({
   const [imagePath, setImagePath] = useState<string>('');
   useEffect(() => {
     getImage(photo__url).then((path) => setImagePath(path));
-  }, []);
+  }, [photo__url]);
   return (
     <Card sx={{ maxWidth: 200, minWidth: 200, marginLeft: 4, marginBottom: 4 }}>
       <CardMedia
