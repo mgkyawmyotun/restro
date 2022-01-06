@@ -5,7 +5,7 @@ import styles from '../scss/input.module.scss';
 
 interface InputFormProps {
   label: string;
-  type: 'text' | 'password';
+  type: 'text' | 'password' | 'number';
   name: string;
 }
 export const InputField: FC<InputFormProps> = ({ label, name, type }) => {
